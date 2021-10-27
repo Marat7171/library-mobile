@@ -1,8 +1,19 @@
 import {Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, FlatList} from "react-native";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useMemo} from "react";
 import BooksForm from "./BooksForm";
 import React from "react";
 import BookItem from "./BookItem";
+
+
+export const usePosts = (posts, query) => {
+
+    if (query == '') return null;
+
+    return posts.filter(post => post.Author.toLowerCase().includes(query.toLowerCase()) ||
+        post.BookName.toLowerCase().includes(query.toLowerCase()))
+
+}
+
 
 const RenderFooter = ({getData, deleteData}) => {
     return (
@@ -44,6 +55,9 @@ export default function Books({navigation}) {
     ])
     const [paginatItem, setPaginatItem] = useState([]);
     const [offset, setOffset] = useState(1);
+    const [filter, setFilter] = useState('');
+
+    const searchedBooks = usePosts(booksList, filter);
 
     useEffect(() => getData(), []);
     useEffect(() => deleteData(), []);
@@ -65,10 +79,10 @@ export default function Books({navigation}) {
         <View style={styles.books}>
             <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
             <Text style={styles.title}>Books</Text>
-            <BooksForm/>
+            <BooksForm setFilter={setFilter}/>
             <Text style={styles.titleRes}>Results</Text>
             <FlatList
-                data={paginatItem}
+                data={searchedBooks || paginatItem}
                 renderItem={({item}) => <BookItem item={item} navigation={navigation}/>}
                 keyExtractor={(item, index) => index.toString()}
                 ListFooterComponent={<RenderFooter deleteData={deleteData} getData={getData}/>}/>
@@ -169,8 +183,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     btnText: {
-            color: 'white',
-            fontSize: 15,
-            textAlign: 'center',
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center',
     }
 })

@@ -2,28 +2,21 @@ import {Formik, Form, Field } from "formik";
 import {Image, StyleSheet, TextInput, View} from "react-native";
 import React from "react";
 
-const MyReactNativeForm = (props) => (
-    <Formik
-        initialValues={{Search: ''}}
-        onSubmit={values => {
-            console.log(values)
-        }}
-    >
-        {({touched, errors,handleChange, handleBlur, handleSubmit, values}) => (
+const MyReactNativeForm = ({setFilter}) => {
+    const search = (e) => {
+        setFilter(e);
+        console.log(e);
+    };
 
-            <View style={styles.form}>
-                <TextInput style={styles.itemFormInput}
-                           onChangeText={handleChange('Search')}
-                           onBlur={handleBlur('Search')}
-                           value={values.Search}
-                           name="Search"
-                           placeholder="Search"
-                />
-                <Image style={styles.magnifier} source={require("../../images/magnifier.png")}/>
-            </View>
-        )}
-    </Formik>
-);
+    return (
+        <View style={styles.form}>
+            <TextInput style={styles.itemFormInput}
+                       onChangeText={search}
+            />
+            <Image style={styles.magnifier} source={require("../../images/magnifier.png")}/>
+        </View>
+    );
+};
 
 export default MyReactNativeForm;
 
