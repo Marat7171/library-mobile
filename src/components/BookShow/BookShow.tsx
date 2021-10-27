@@ -1,16 +1,22 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-const BookShow = () => {
+const BookShow = ({ route, navigation }) => {
+
+    const goToSettings = () => {
+        navigation.navigate('Settings')
+    }
+
     return (
-        <View>
+        <View style={styles.books}>
+            <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
             <Text style={styles.title}>Book</Text>
             <Image style={styles.arrowImage} source={require("../../images/arrow-left.png")}/>
             <View style={styles.bookNameMainContainer}>
                 <Image style={styles.image} source={require("../../images/MainBookImage.png")}/>
                 <View style={styles.bookNameContainer}>
-                    <Text style={styles.bookName}>Pet Sematary</Text>
-                    <Text style={styles.bookAuthor}>Stephen King</Text>
+                    <Text style={styles.bookName}>{route.params.BookName}</Text>
+                    <Text style={styles.bookAuthor}>{route.params.Author}</Text>
                     <View style={styles.grade}>
                         <Image style={styles.gradeImage} source={require('../../images/BookShowStar.png')}/>
                         <Text style={styles.gradeNumber}>4.68</Text>
@@ -19,9 +25,7 @@ const BookShow = () => {
                 </View>
             </View>
             <View style={styles.descriptionBlog}>
-                <Text style={styles.descriptionBlogText}>Sometimes dead is better....When the Creeds move into a
-                    beautiful old house in rural Maine, it all seems too good to be true: physician father, beautiful
-                    wife, charming little daughter, adorable infant son -- and now an idyllic home....</Text>
+                <Text style={styles.descriptionBlogText}>{route.params.descrioption}</Text>
                 <Text style={styles.descriptionBlogLink}>
                     Full Synopsis
                 </Text>
@@ -30,11 +34,71 @@ const BookShow = () => {
             <TouchableOpacity style={styles.itemFormButton} >
                 <Text style={styles.itemFormButtonText}>Take the book</Text>
             </TouchableOpacity>
+            <View style={styles.footer}>
+                <View style={styles.footerLeft}>
+                    <TouchableOpacity>
+                        <Image style={styles.footerLeftImg} source={require("../../images/footerHouse.png")}/>
+                        <Text style={styles.footerLeftText}>Books</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.footerRight}>
+                    <TouchableOpacity>
+                        <Image style={styles.footerRightImg} source={require("../../images/footerProfile.png")}/>
+                        <Text style={styles.footerRightText}>Settings</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    books: {
+        position: "relative",
+        backgroundColor: "#E5E5E5",
+        height: "100%",
+    },
+    footer: {
+        position: "absolute",
+        bottom: 0,
+        height: 80,
+        width: "100%",
+        backgroundColor: "#FFF",
+        flexDirection: 'row',
+        justifyContent: "center",
+        paddingTop: 10,
+    },
+    footerLeft: {
+        textAlign: "center",
+        marginRight: 60,
+    },
+    footerRight: {
+        textAlign: "center",
+    },
+    footerLeftImg: {
+        marginLeft: 5,
+        marginBottom: 5,
+    },
+    footerRightImg: {
+        marginLeft: 10,
+        marginBottom: 7,
+    },
+    footerLeftText: {
+        fontWeight: "normal",
+        fontSize: 10,
+        lineHeight: 13,
+        textAlign: "center",
+        letterSpacing: 0.12,
+        color: "rgba(56, 79, 125, 0.45)",
+    },
+    footerRightText: {
+        fontWeight: "normal",
+        fontSize: 10,
+        lineHeight: 13,
+        textAlign: "center",
+        letterSpacing: 0.12,
+        color: "rgba(56, 79, 125, 0.45)",
+    },
     title: {
         marginTop: "-20%",
         fontStyle: "normal",
@@ -43,6 +107,10 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         textAlign: "center",
         color: "#FFFFFF",
+    },
+    ball4: {
+        width: "100%",
+
     },
     image: {},
     arrowImage: {
@@ -133,6 +201,7 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         color: "#FFFFFF",
     },
+
 });
 
 export default BookShow;

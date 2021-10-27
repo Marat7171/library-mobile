@@ -1,20 +1,24 @@
 import {Image, Text, View, StyleSheet} from "react-native";
 import BooksForm from "../Books/BooksForm";
 import React from "react";
+import {TouchableOpacity} from "react-native-gesture-handler";
 
 const CommonPage = ({children}) => {
     return (
             <View style={styles.books}>
-                <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
                 {children}
                 <View style={styles.footer}>
                     <View style={styles.footerLeft}>
+                        <TouchableOpacity>
                         <Image style={styles.footerLeftImg} source={require("../../images/footerHouse.png")}/>
                         <Text style={styles.footerLeftText}>Books</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.footerRight}>
+                        <TouchableOpacity>
                         <Image style={styles.footerRightImg} source={require("../../images/footerProfile.png")}/>
                         <Text style={styles.footerRightText}>Settings</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -26,10 +30,6 @@ const styles = StyleSheet.create({
         position: "relative",
         backgroundColor: "#E5E5E5",
         height: "100%",
-    },
-    ball4: {
-        width: "100%",
-
     },
     footer: {
         position: "absolute",
