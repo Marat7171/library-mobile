@@ -8,7 +8,9 @@ const SignupSchema = Yup.object().shape({
     password: Yup.string()
         .min(4, 'Минимум 4 символа.')
         .required('Обязательное поле.'),
-    email: Yup.string().required('Обязательное поле.'),
+    email: Yup.string()
+        .required('Обязательное поле.')
+        .email('Введите email'),
 });
 
 const MyReactNativeForm = (props) => (

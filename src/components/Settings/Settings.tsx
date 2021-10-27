@@ -62,20 +62,20 @@ const Settings = ({ navigation }) => {
                     </View>
                 </View>
             </View>
-            <View style={styles.footer}>
-                <View style={styles.footerLeft}>
-                    <TouchableOpacity onPress={goToBooks}>
-                        <Image style={styles.footerLeftImg} source={require("../../images/footerHouse.png")}/>
-                        <Text style={styles.footerLeftText}>Books</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.footerRight}>
-                    <TouchableOpacity>
-                        <Image style={styles.footerRightImg} source={require("../../images/footerProfile.png")}/>
-                        <Text style={styles.footerRightText}>Settings</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            {/*<View style={styles.footer}>*/}
+            {/*    <View style={styles.footerLeft}>*/}
+            {/*        <TouchableOpacity onPress={goToBooks}>*/}
+            {/*            <Image style={styles.footerLeftImg} source={require("../../images/footerHouse.png")}/>*/}
+            {/*            <Text style={styles.footerLeftText}>Books</Text>*/}
+            {/*        </TouchableOpacity>*/}
+            {/*    </View>*/}
+            {/*    <View style={styles.footerRight}>*/}
+            {/*        <TouchableOpacity>*/}
+            {/*            <Image style={styles.footerRightImg} source={require("../../images/footerProfile.png")}/>*/}
+            {/*            <Text style={styles.footerRightText}>Settings</Text>*/}
+            {/*        </TouchableOpacity>*/}
+            {/*    </View>*/}
+            {/*</View>*/}
         </View>
     );
 };

@@ -1,10 +1,32 @@
 import {Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, FlatList} from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import BooksForm from "./BooksForm";
 import React from "react";
+import BookItem from "./BookItem";
+
+const RenderFooter = ({getData, deleteData}) => {
+    return (
+        <View style={styles.footerPaginator}>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={getData}
+                style={styles.loadMoreBtn}
+            >
+                <Text style={styles.btnText}>Load More</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={deleteData}
+                style={styles.loadMoreBtn}
+            >
+                <Text style={styles.btnText}>Delete list</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 export default function Books({navigation}) {
-    const [booksList, booksListSet] = useState([
+    const [booksList, setbooksList] = useState([
         {id: 1, Author: "Georgie", BookName: "Gookes", descrioption: "Gookes Gookes Gookes Gookes"},
         {id: 2, Author: "Gualterio", BookName: "Spaughton", descrioption: "Spaughton Spaughton Spaughton Spaughton"},
         {id: 3, Author: "Milton", BookName: "Guerrieo", descrioption: "Guerrieo Guerrieo Guerrieo Guerrieo"},
@@ -20,53 +42,43 @@ export default function Books({navigation}) {
         {id: 13, Author: "Bengt", BookName: "Bowerman", descrioption: "Bowerman Bowerman Bowerman Bowerman"},
         {id: 14, Author: "Alisander", BookName: "Totterdell", descrioption: "Totterdell Totterdell Totterdell"},
     ])
+    const [paginatItem, setPaginatItem] = useState([]);
+    const [offset, setOffset] = useState(1);
 
-    const goToSettings = () => {
-        navigation.navigate('Settings')
-    }
+    useEffect(() => getData(), []);
+    useEffect(() => deleteData(), []);
 
-  return (
-      <View style={styles.books}>
-          <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
-          <Text style={styles.title}>Books</Text>
-          <BooksForm/>
-          <Text style={styles.titleRes}>Results</Text>
-          <FlatList data={booksList} renderItem={({item}) => {
-              return <TouchableOpacity onPress={() => navigation.navigate('Book', item)}>
-                  <View style={styles.booksBlog}>
-                      <View style={styles.booksContainerItem}>
-                          <Image style={styles.booksContainerItemLeft} source={require("../../images/imageBook.png")}/>
-                          <View style={styles.booksContainerItemRight}>
-                              <Text style={styles.booksContainerItemRightTitle}>{item.BookName}</Text>
-                              <Text style={styles.booksContainerItemRightText}>{item.Author}</Text>
-                              <View style={styles.booksContainerItemRightStars}>
-                                  <Image source={require("../../images/StarFull.png")}/>
-                                  <Image source={require("../../images/StarFull.png")}/>
-                                  <Image source={require("../../images/StarFull.png")}/>
-                                  <Image source={require("../../images/StarFull.png")}/>
-                                  <Image source={require("../../images/StarBlank.png")}/>
-                              </View>
-                          </View>
-                      </View>
-                  </View>
-              </TouchableOpacity>
-          }}/>
-          <View style={styles.footer}>
-              <View style={styles.footerLeft}>
-                  <TouchableOpacity>
-                      <Image style={styles.footerLeftImg} source={require("../../images/footerHouse.png")}/>
-                      <Text style={styles.footerLeftText}>Books</Text>
-                  </TouchableOpacity>
-              </View>
-              <View style={styles.footerRight}>
-                  <TouchableOpacity onPress={goToSettings}>
-                      <Image style={styles.footerRightImg} source={require("../../images/footerProfile.png")}/>
-                      <Text style={styles.footerRightText}>Settings</Text>
-                  </TouchableOpacity>
-              </View>
-          </View>
-      </View>
-  )
+    const getData = () => {
+        let newArr = [];
+        setOffset(offset + 2);
+        newArr = booksList.filter(item => item.id <= offset);
+        console.log(newArr);
+        console.log(offset);
+        setPaginatItem([...newArr]);
+    };
+    const deleteData = () => {
+        setOffset(2);
+        setPaginatItem([]);
+    };
+
+    return (
+        <View style={styles.books}>
+            <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
+            <Text style={styles.title}>Books</Text>
+            <BooksForm/>
+            <Text style={styles.titleRes}>Results</Text>
+            <FlatList
+                data={paginatItem}
+                renderItem={({item}) => <BookItem item={item} navigation={navigation}/>}
+                keyExtractor={(item, index) => index.toString()}
+                ListFooterComponent={<RenderFooter deleteData={deleteData} getData={getData}/>}/>
+        </View>
+    )
+}
+
+
+const LoadBooksButton = () => {
+    return
 }
 
 const styles = StyleSheet.create({
@@ -99,46 +111,6 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
         textTransform: "uppercase",
         color: "rgba(56, 79, 125, 0.8)",
-    },
-    booksBlog: {
-        marginTop: "5%",
-        marginLeft: "10%",
-        marginRight: "10%",
-    },
-    booksContainerItem: {
-        backgroundColor: "#FFFFFF",
-        flexDirection: 'row',
-        width: "100%",
-        height: 147,
-        padding: "5%",
-        borderRadius: 10,
-    },
-    booksContainerItemLeft: {
-
-
-    },
-    booksContainerItemRight: {
-        marginLeft: "5%",
-        width: '50%',
-    },
-    booksContainerItemRightStars: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 100,
-        marginTop: 20,
-    },
-    booksContainerItemRightTitle: {
-        fontSize: 18,
-        lineHeight: 23,
-        color: "#384F7D",
-    },
-    booksContainerItemRightText: {
-        paddingTop: 10,
-        fontSize: 14,
-        lineHeight: 18,
-        display: "flex",
-        color: "rgba(56, 79, 125, 0.8)",
-
     },
     footer: {
         position: "absolute",
@@ -181,4 +153,24 @@ const styles = StyleSheet.create({
         letterSpacing: 0.12,
         color: "rgba(56, 79, 125, 0.45)",
     },
+    footerPaginator: {
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    loadMoreBtn: {
+        marginLeft: 5,
+        padding: 10,
+        backgroundColor: '#800000',
+        borderRadius: 4,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    btnText: {
+            color: 'white',
+            fontSize: 15,
+            textAlign: 'center',
+    }
 })

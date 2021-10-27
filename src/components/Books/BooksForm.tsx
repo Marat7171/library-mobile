@@ -10,6 +10,7 @@ const MyReactNativeForm = (props) => (
         }}
     >
         {({touched, errors,handleChange, handleBlur, handleSubmit, values}) => (
+
             <View style={styles.form}>
                 <TextInput style={styles.itemFormInput}
                            onChangeText={handleChange('Search')}
