@@ -3,10 +3,11 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const BookItem = ({navigation, item}) => {
     let count = 1;
+    let countKey = 0;
     const array = ['star', 'star', 'star', 'star', 'star'];
 
     return (
-            <TouchableOpacity onPress={() => navigation.navigate('BookShow', item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('BookShowScreen', item)}>
                 <View style={styles.booksBlog}>
                     <View style={styles.booksContainerItem}>
                         <Image style={styles.booksContainerItemLeft}
@@ -17,10 +18,12 @@ const BookItem = ({navigation, item}) => {
                             <View style={styles.booksContainerItemRightStars}>
                                 {array.map(() => {
                                     if (count <= 5 && item.grade >= count) {
+                                        countKey = countKey + 1;
                                         count = count + 1;
-                                        return <Image source={require("../../images/StarFull.png")}/>
+                                        return <Image key={countKey} source={require("../../images/StarFull.png")}/>
                                     }
-                                    return <Image source={require("../../images/StarBlank.png")}/>
+                                    countKey = countKey + 1;
+                                    return <Image key={countKey} source={require("../../images/StarBlank.png")}/>
                                 })}
                             </View>
                         </View>

@@ -17,7 +17,7 @@ const AppNavigator = () => {
                            screenOptions={{
                                headerShown: false
                            }}>
-                <Tab.Screen name="BookStack" component={BookStack}/>
+                <Tab.Screen name="Books" component={BookStack}/>
                 <Tab.Screen name="Settings" component={Settings}/>
             </Tab.Navigator>
         </NavigationContainer>
@@ -30,11 +30,11 @@ function BookStack() {
             headerShown: false
         }}>
         <Stack.Screen
-            name="Books"
+            name="BooksScreen"
             component={Books}
         />
         <Stack.Screen
-            name="BookShow"
+            name="BookShowScreen"
             component={BookShow}
         />
     </Stack.Navigator>
