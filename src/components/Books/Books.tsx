@@ -1,13 +1,12 @@
-import {Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, FlatList} from "react-native";
-import {useEffect, useState, useMemo} from "react";
-import BooksForm from "./BookSearchForm";
+import {Image, Text, View, StyleSheet, TouchableOpacity, FlatList} from "react-native";
+import {useEffect, useState} from "react";
 import React from "react";
 import BookItem from "./BookItem";
 import BookSearchForm from "./BookSearchForm";
+import {useSelector} from "react-redux";
 
 
 export const usePosts = (posts, query) => {
-
     if (query == '') return null;
 
     return posts.filter(post => post.Author.toLowerCase().includes(query.toLowerCase()) ||
@@ -38,26 +37,10 @@ const RenderFooter = ({getData, deleteData}) => {
 };
 
 export default function Books({navigation}) {
-    const [booksList, setbooksList] = useState([
-        {id: 1, Author: "Georgie", BookName: "Gookes", descrioption: "Gookes Gookes Gookes Gookes"},
-        {id: 2, Author: "Gualterio", BookName: "Spaughton", descrioption: "Spaughton Spaughton Spaughton Spaughton"},
-        {id: 3, Author: "Milton", BookName: "Guerrieo", descrioption: "Guerrieo Guerrieo Guerrieo Guerrieo"},
-        {id: 4, Author: "Waldon", BookName: "Lubman", descrioption: "Lubman Lubman Lubman Lubman"},
-        {id: 5, Author: "Lesley", BookName: "Agg", descrioption: "Agg AggAgg Agg AggAgg Agg Agg"},
-        {id: 6, Author: "Bengt", BookName: "Bowerman", descrioption: "Bowerman Bowerman Bowerman Bowerman"},
-        {id: 7, Author: "Alisander", BookName: "Totterdell", descrioption: "Totterdell Totterdell Totterdell"},
-        {id: 8, Author: "Georgie", BookName: "Gookes", descrioption: "Gookes Gookes Gookes Gookes"},
-        {id: 9, Author: "Gualterio", BookName: "Spaughton", descrioption: "Spaughton Spaughton Spaughton Spaughton"},
-        {id: 10, Author: "Milton", BookName: "Guerrieo", descrioption: "Guerrieo Guerrieo Guerrieo Guerrieo"},
-        {id: 11, Author: "Waldon", BookName: "Lubman", descrioption: "Lubman Lubman Lubman Lubman"},
-        {id: 12, Author: "Lesley", BookName: "Agg", descrioption: "Agg AggAgg Agg AggAgg Agg Agg"},
-        {id: 13, Author: "Bengt", BookName: "Bowerman", descrioption: "Bowerman Bowerman Bowerman Bowerman"},
-        {id: 14, Author: "Alisander", BookName: "Totterdell", descrioption: "Totterdell Totterdell Totterdell"},
-    ])
+    const booksList = useSelector(state => state.toolkit.booksList);
     const [paginatItem, setPaginatItem] = useState([]);
     const [offset, setOffset] = useState(1);
     const [filter, setFilter] = useState('');
-
     const searchedBooks = usePosts(booksList, filter);
 
     useEffect(() => getData(), []);
@@ -67,8 +50,6 @@ export default function Books({navigation}) {
         let newArr = [];
         setOffset(offset + 2);
         newArr = booksList.filter(item => item.id <= offset);
-        console.log(newArr);
-        console.log(offset);
         setPaginatItem([...newArr]);
     };
     const deleteData = () => {
@@ -89,11 +70,6 @@ export default function Books({navigation}) {
                 ListFooterComponent={<RenderFooter deleteData={deleteData} getData={getData}/>}/>
         </View>
     )
-}
-
-
-const LoadBooksButton = () => {
-    return
 }
 
 const styles = StyleSheet.create({

@@ -30,13 +30,13 @@ const BookShow = ({ route }) => {
                     <Text style={styles.bookAuthor}>{route.params.Author}</Text>
                     <View style={styles.grade}>
                         <Image style={styles.gradeImage} source={require('../../images/BookShowStar.png')}/>
-                        <Text style={styles.gradeNumber}>4.68</Text>
+                        <Text style={styles.gradeNumber}>{route.params.grade}</Text>
                     </View>
-                    <Text style={styles.reviews}>2,464 reviews</Text>
+                    <Text style={styles.reviews}>{route.params.reviews} reviews</Text>
                 </View>
             </View>
             <View style={styles.descriptionBlog}>
-                <Text style={styles.descriptionBlogText}>{route.params.descrioption}</Text>
+                <Text style={styles.descriptionBlogText}>{route.params.description}</Text>
                 <Text style={styles.descriptionBlogLink}>
                     Full Synopsis
                 </Text>
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
         marginRight: "10%",
     },
     descriptionBlogText: {
+        height: 200,
         fontSize: 14,
         lineHeight: 22,
         color: "rgba(56, 79, 125, 0.8)",
@@ -143,13 +144,13 @@ const styles = StyleSheet.create({
         color: "#384F7D",
     },
     line: {
-        marginTop: 33,
+        marginTop: 30,
         borderStyle: "solid",
         borderColor: "rgba(56, 79, 125, 0.1)",
         borderBottomWidth: 1,
     },
     itemFormButton: {
-        marginTop: 40,
+        marginTop: 30,
         marginLeft: "10%",
         width: "80%",
         height: 56,
