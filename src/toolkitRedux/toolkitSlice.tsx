@@ -5,11 +5,14 @@ const toolkitSlice = createSlice({
     name: "booksManager",
     initialState: {
         auth: false,
-        booksSwitch: false,
+        personTake: []
     },
     reducers: {
-        booksSwitchAction(state) {
-            state.booksSwitch = !state.booksSwitch;
+        personTakeAction(state, action) {
+            state.personTake.push(action.payload)
+        },
+        personReturnAction(state, action) {
+            state.personTake = state.personTake.filter(a => action.payload != a);
         },
         authSwitch(state) {
             state.auth = !state.auth;
@@ -19,4 +22,4 @@ const toolkitSlice = createSlice({
 })
 
 export default toolkitSlice.reducer
-export const {booksSwitchAction, authSwitch} = toolkitSlice.actions
+export const {personTakeAction, personReturnAction, authSwitch} = toolkitSlice.actions

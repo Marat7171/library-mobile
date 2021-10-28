@@ -15,15 +15,7 @@ const AppNavigator = () => {
         <NavigationContainer>
             <Tab.Navigator initialRouteName="Books"
                            screenOptions={{
-                               headerStyle: {
-                                   backgroundColor: '#f4511e',
-                               },
-                               headerTintColor: '#fff',
-                               headerTitleStyle: {
-                                   marginLeft: '50%',
-                                   fontWeight: 'bold',
-                                   textAlign: 'center',
-                               }
+                               headerShown: false
                            }}>
                 <Tab.Screen name="Books" component={BookStack}/>
                 <Tab.Screen name="Settings" component={Settings}/>
@@ -33,7 +25,10 @@ const AppNavigator = () => {
 };
 
 function BookStack() {
-    return <Stack.Navigator>
+    return <Stack.Navigator
+        screenOptions={{
+            headerShown: false
+        }}>
         <Stack.Screen
             name="Books"
             component={Books}

@@ -1,16 +1,21 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {booksSwitchAction} from "../../toolkitRedux/toolkitSlice";
+import {personReturnAction, personTakeAction} from "../../toolkitRedux/toolkitSlice";
 
 const BookShow = ({ route, navigation }) => {
 
-    const booksSwitch = useSelector(state => state.toolkit.booksSwitch);
+    const booksArray = useSelector(state => state.toolkit.personTake);
     const dispatch = useDispatch();
 
-    const press = () => {
-        dispatch(booksSwitchAction());
-        console.log(booksSwitch);
+    const pressTake = () => {
+        dispatch(personTakeAction(route.params.id));
+        console.log(booksArray);
+    }
+
+    const pressReturn = () => {
+        dispatch(personReturnAction(route.params.id));
+        console.log(booksArray);
     }
 
     const goToSettings = () => {
@@ -41,8 +46,21 @@ const BookShow = ({ route, navigation }) => {
                 </Text>
             </View>
             <View style={styles.line}></View>
-            <TouchableOpacity onPress={press} style={booksSwitch ? [styles.itemFormButton, styles.itemFormButtonActive] : styles.itemFormButton} >
-                <Text style={styles.itemFormButtonText}>{booksSwitch ? "return the book" : "Take the book"}</Text>
+            <TouchableOpacity onPress={booksArray.includes(route.params.id)
+                                  ?
+                                    pressReturn
+                                  :
+                                    pressTake}
+                              style={booksArray.includes(route.params.id)
+                                  ?
+                                    [styles.itemFormButton, styles.itemFormButtonActive]
+                                  :
+                                    styles.itemFormButton} >
+                <Text style={styles.itemFormButtonText}>{booksArray.includes(route.params.id)
+                                  ?
+                                    "return the book"
+                                  :
+                                    "Take the book"}</Text>
             </TouchableOpacity>
             {/*<View style={styles.footer}>*/}
             {/*    <View style={styles.footerLeft}>*/}
