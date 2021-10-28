@@ -1,10 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {useDispatch} from "react-redux";
+import {authSwitch} from "../../toolkitRedux/toolkitSlice";
 
-const Settings = ({ navigation }) => {
+const Settings = ({navigation}) => {
     const goToBooks = () => {
         navigation.navigate('Books')
     }
+    const dispatch = useDispatch();
 
     return (
         <View style={styles.books}>
@@ -57,9 +60,11 @@ const Settings = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={styles.groupContainerLogout}>
-                    <View style={styles.groupLogout}>
-                        <Text style={styles.groupNameLogout}>Logout</Text>
-                    </View>
+                    <TouchableOpacity onPress={() => dispatch(authSwitch())}>
+                        <View style={styles.groupLogout}>
+                            <Text style={styles.groupNameLogout}>Logout</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             {/*<View style={styles.footer}>*/}

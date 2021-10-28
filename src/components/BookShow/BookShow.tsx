@@ -1,7 +1,17 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {booksSwitchAction} from "../../toolkitRedux/toolkitSlice";
 
 const BookShow = ({ route, navigation }) => {
+
+    const booksSwitch = useSelector(state => state.toolkit.booksSwitch);
+    const dispatch = useDispatch();
+
+    const press = () => {
+        dispatch(booksSwitchAction());
+        console.log(booksSwitch);
+    }
 
     const goToSettings = () => {
         navigation.navigate('Settings')
@@ -31,8 +41,8 @@ const BookShow = ({ route, navigation }) => {
                 </Text>
             </View>
             <View style={styles.line}></View>
-            <TouchableOpacity style={styles.itemFormButton} >
-                <Text style={styles.itemFormButtonText}>Take the book</Text>
+            <TouchableOpacity onPress={press} style={booksSwitch ? [styles.itemFormButton, styles.itemFormButtonActive] : styles.itemFormButton} >
+                <Text style={styles.itemFormButtonText}>{booksSwitch ? "return the book" : "Take the book"}</Text>
             </TouchableOpacity>
             {/*<View style={styles.footer}>*/}
             {/*    <View style={styles.footerLeft}>*/}
@@ -191,6 +201,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 8,
 
+    },
+    itemFormButtonActive: {
+        backgroundColor: "#2DCB59",
     },
     itemFormButtonText: {
         fontStyle: "normal",

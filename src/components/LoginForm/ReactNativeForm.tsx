@@ -3,6 +3,8 @@ import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-
 import React from "react";
 import * as Yup from 'yup';
 import {UserAPI} from "../../api/api";
+import {useDispatch} from "react-redux";
+import {authSwitch} from "../../toolkitRedux/toolkitSlice";
 
 const SignupSchema = Yup.object().shape({
     password: Yup.string()
@@ -13,15 +15,19 @@ const SignupSchema = Yup.object().shape({
         .email('Введите email'),
 });
 
-const MyReactNativeForm = (props) => (
-    <Formik
+const MyReactNativeForm = (props) => {
+    const dispatch = useDispatch();
+
+    return (
+        <Formik
         initialValues={{email: '', password: ''}}
         validationSchema={SignupSchema}
         onSubmit={values => {
             UserAPI.getUser(values)
+            dispatch(authSwitch());
         }}
     >
-        {({touched, errors,handleChange, handleBlur, handleSubmit, values}) => (
+        {({touched, errors, handleChange, handleBlur, handleSubmit, values}) => (
             <View style={styles.form}>
                 <Text style={styles.itemFormTitle}>Email</Text>
                 <TextInput style={styles.itemFormInput}
@@ -53,7 +59,8 @@ const MyReactNativeForm = (props) => (
             </View>
         )}
     </Formik>
-);
+    );
+};
 
 export default MyReactNativeForm;
 
