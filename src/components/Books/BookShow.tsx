@@ -3,7 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {personReturnAction, personTakeAction} from "../../toolkitRedux/toolkitSlice";
 
-const BookShow = ({ route, navigation }) => {
+const BookShow = ({ route }) => {
 
     const booksArray = useSelector(state => state.toolkit.personTake);
     const dispatch = useDispatch();
@@ -16,10 +16,6 @@ const BookShow = ({ route, navigation }) => {
     const pressReturn = () => {
         dispatch(personReturnAction(route.params.id));
         console.log(booksArray);
-    }
-
-    const goToSettings = () => {
-        navigation.navigate('Settings')
     }
 
     return (
@@ -62,20 +58,6 @@ const BookShow = ({ route, navigation }) => {
                                   :
                                     "Take the book"}</Text>
             </TouchableOpacity>
-            {/*<View style={styles.footer}>*/}
-            {/*    <View style={styles.footerLeft}>*/}
-            {/*        <TouchableOpacity>*/}
-            {/*            <Image style={styles.footerLeftImg} source={require("../../images/footerHouse.png")}/>*/}
-            {/*            <Text style={styles.footerLeftText}>Books</Text>*/}
-            {/*        </TouchableOpacity>*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.footerRight}>*/}
-            {/*        <TouchableOpacity>*/}
-            {/*            <Image style={styles.footerRightImg} source={require("../../images/footerProfile.png")}/>*/}
-            {/*            <Text style={styles.footerRightText}>Settings</Text>*/}
-            {/*        </TouchableOpacity>*/}
-            {/*    </View>*/}
-            {/*</View>*/}
         </View>
     );
 };
@@ -85,47 +67,6 @@ const styles = StyleSheet.create({
         position: "relative",
         backgroundColor: "#E5E5E5",
         height: "100%",
-    },
-    footer: {
-        position: "absolute",
-        bottom: 0,
-        height: 80,
-        width: "100%",
-        backgroundColor: "#FFF",
-        flexDirection: 'row',
-        justifyContent: "center",
-        paddingTop: 10,
-    },
-    footerLeft: {
-        textAlign: "center",
-        marginRight: 60,
-    },
-    footerRight: {
-        textAlign: "center",
-    },
-    footerLeftImg: {
-        marginLeft: 5,
-        marginBottom: 5,
-    },
-    footerRightImg: {
-        marginLeft: 10,
-        marginBottom: 7,
-    },
-    footerLeftText: {
-        fontWeight: "normal",
-        fontSize: 10,
-        lineHeight: 13,
-        textAlign: "center",
-        letterSpacing: 0.12,
-        color: "rgba(56, 79, 125, 0.45)",
-    },
-    footerRightText: {
-        fontWeight: "normal",
-        fontSize: 10,
-        lineHeight: 13,
-        textAlign: "center",
-        letterSpacing: 0.12,
-        color: "rgba(56, 79, 125, 0.45)",
     },
     title: {
         marginTop: "-20%",
@@ -140,7 +81,6 @@ const styles = StyleSheet.create({
         width: "100%",
 
     },
-    image: {},
     arrowImage: {
         position: "absolute",
         left: "10%",
@@ -207,7 +147,6 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "rgba(56, 79, 125, 0.1)",
         borderBottomWidth: 1,
-        //border: "1px solid rgba(56, 79, 125, 0.1)",
     },
     itemFormButton: {
         marginTop: 40,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import ReactNativeForm from "./ReactNativeForm";
+import LoginFormInner from "./LoginFormInner";
 
 
 
@@ -12,7 +12,7 @@ export default function LoginForm() {
             <Image style={styles.ball3} source={require('../../images/Ellipse_2.1.png')}/>
             <View>
                 <Text style={styles.title}>Sign In</Text>
-                <ReactNativeForm/>
+                <LoginFormInner/>
             </View>
         </View>
     );
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     title: {
         marginTop: "20%",
         marginLeft: "10%",
-        display: "flex",
         fontSize: 32,
         lineHeight: 40,
         color: "#384F7D",

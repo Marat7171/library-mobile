@@ -15,7 +15,7 @@ const SignupSchema = Yup.object().shape({
         .email('Введите email'),
 });
 
-const MyReactNativeForm = (props) => {
+const LoginFormInner = (props) => {
     const dispatch = useDispatch();
 
     return (
@@ -34,7 +34,6 @@ const MyReactNativeForm = (props) => {
                            onChangeText={handleChange('email')}
                            onBlur={handleBlur('email')}
                            value={values.email}
-                           name="email"
                 />
                 {errors.email && touched.email ? (
                     <Text style={styles.itemFormError}>{errors.email}</Text>
@@ -46,7 +45,6 @@ const MyReactNativeForm = (props) => {
                                onChangeText={handleChange('password')}
                                onBlur={handleBlur('password')}
                                value={values.password}
-                               name="password"
                     />
                     <Image style={styles.itemFormInputEye} source={require('../../images/Vector.png')}/>
                 </View>
@@ -62,11 +60,10 @@ const MyReactNativeForm = (props) => {
     );
 };
 
-export default MyReactNativeForm;
+export default LoginFormInner;
 
 const styles = StyleSheet.create({
     form: {
-        display: "flex",
         marginTop: "15%",
     },
     itemFormTitle: {

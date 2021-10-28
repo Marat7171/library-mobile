@@ -1,6 +1,6 @@
 import React from 'react';
 import AppNavigator from "./navigation/AppNavigator";
-import LoginForm from "./src/components/LoginForm/LoginForm";
+import LoginForm from "./src/components/Auth/LoginForm";
 import {Provider, useSelector} from "react-redux";
 import {store} from "./src/toolkitRedux";
 

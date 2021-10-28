@@ -1,8 +1,9 @@
 import {Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, FlatList} from "react-native";
 import {useEffect, useState, useMemo} from "react";
-import BooksForm from "./BooksForm";
+import BooksForm from "./BookSearchForm";
 import React from "react";
 import BookItem from "./BookItem";
+import BookSearchForm from "./BookSearchForm";
 
 
 export const usePosts = (posts, query) => {
@@ -79,7 +80,7 @@ export default function Books({navigation}) {
         <View style={styles.books}>
             <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
             <Text style={styles.title}>Books</Text>
-            <BooksForm setFilter={setFilter}/>
+            <BookSearchForm setFilter={setFilter}/>
             <Text style={styles.titleRes}>Results</Text>
             <FlatList
                 data={searchedBooks || paginatItem}
@@ -121,51 +122,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 12,
         lineHeight: 15,
-        display: "flex",
         letterSpacing: 1,
         textTransform: "uppercase",
         color: "rgba(56, 79, 125, 0.8)",
-    },
-    footer: {
-        position: "absolute",
-        bottom: 0,
-        height: 80,
-        width: "100%",
-        backgroundColor: "#FFF",
-        flexDirection: 'row',
-        justifyContent: "center",
-        paddingTop: 10,
-    },
-    footerLeft: {
-        textAlign: "center",
-        marginRight: 60,
-    },
-    footerRight: {
-        textAlign: "center",
-    },
-    footerLeftImg: {
-        marginLeft: 5,
-        marginBottom: 5,
-    },
-    footerRightImg: {
-        marginLeft: 10,
-        marginBottom: 7,
-    },
-    footerLeftText: {
-        fontWeight: "normal",
-        fontSize: 10,
-        lineHeight: 13,
-        textAlign: "center",
-        letterSpacing: 0.12,
-        color: "rgba(56, 79, 125, 0.45)",
-    },
-    footerRightText: {
-        fontWeight: "normal",
-        fontSize: 10,
-        lineHeight: 13,
-        textAlign: "center",
-        letterSpacing: 0.12,
-        color: "rgba(56, 79, 125, 0.45)",
     },
     footerPaginator: {
         padding: 10,

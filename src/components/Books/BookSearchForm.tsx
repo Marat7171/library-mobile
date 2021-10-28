@@ -1,8 +1,7 @@
-import {Formik, Form, Field } from "formik";
 import {Image, StyleSheet, TextInput, View} from "react-native";
 import React from "react";
 
-const MyReactNativeForm = ({setFilter}) => {
+const BookSearchForm = ({setFilter}) => {
     const search = (e) => {
         setFilter(e);
         console.log(e);
@@ -18,12 +17,11 @@ const MyReactNativeForm = ({setFilter}) => {
     );
 };
 
-export default MyReactNativeForm;
+export default BookSearchForm;
 
 const styles = StyleSheet.create({
     form: {
         position: "relative",
-        display: "flex",
         marginTop: "7%",
     },
     itemFormInput: {

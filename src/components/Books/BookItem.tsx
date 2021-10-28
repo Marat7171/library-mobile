@@ -3,7 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const BookItem = ({navigation, item}) => {
     return (
-            <TouchableOpacity onPress={() => navigation.navigate('Book', item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('BookShow', item)}>
                 <View style={styles.booksBlog}>
                     <View style={styles.booksContainerItem}>
                         <Image style={styles.booksContainerItemLeft}
@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
         padding: "5%",
         borderRadius: 10,
     },
+    booksContainerItemLeft: {
+        width: 71,
+        height: 107,
+    },
     booksContainerItemRight: {
         marginLeft: "5%",
         width: '50%',
@@ -60,7 +64,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         fontSize: 14,
         lineHeight: 18,
-        display: "flex",
         color: "rgba(56, 79, 125, 0.8)",
 
     },
