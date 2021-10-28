@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch} from "react-redux";
 import {authSwitch} from "../../toolkitRedux/toolkitSlice";
+import SettingsListItem from "./SettingsListItem";
 
 const Settings = () => {
 
@@ -12,51 +13,11 @@ const Settings = () => {
             <Image style={styles.ball4} source={require("../../images/Ellipse_2.2.png")}/>
             <Text style={styles.title}>Settings</Text>
             <View style={styles.mainGroupContainer}>
-                <View style={styles.groupContainer}>
-                    <View style={styles.group}>
-                        <Image style={styles.img} source={require('../../images/account.png')}/>
-                        <View style={styles.groupContainerName}>
-                            <Text style={styles.groupName}>Account</Text>
-                        </View>
-                        <Image style={styles.groupBack} source={require('../../images/Back.png')}/>
-                    </View>
-                </View>
-                <View style={styles.groupContainer}>
-                    <View style={styles.group}>
-                        <Image style={styles.img} source={require('../../images/notifications.png')}/>
-                        <View style={styles.groupContainerName}>
-                            <Text style={styles.groupName}>Notifications</Text>
-                        </View>
-                        <Image style={styles.groupBack} source={require('../../images/Back.png')}/>
-                    </View>
-                </View>
-                <View style={styles.groupContainer}>
-                    <View style={styles.group}>
-                        <Image style={styles.img} source={require('../../images/privacy.png')}/>
-                        <View style={styles.groupContainerName}>
-                            <Text style={styles.groupName}>Privacy</Text>
-                        </View>
-                        <Image style={styles.groupBack} source={require('../../images/Back.png')}/>
-                    </View>
-                </View>
-                <View style={styles.groupContainer}>
-                    <View style={styles.group}>
-                        <Image style={styles.img} source={require('../../images/helpCenter.png')}/>
-                        <View style={styles.groupContainerName}>
-                            <Text style={styles.groupName}>Help Center</Text>
-                        </View>
-                        <Image style={styles.groupBack} source={require('../../images/Back.png')}/>
-                    </View>
-                </View>
-                <View style={styles.groupContainer}>
-                    <View style={styles.group}>
-                        <Image style={styles.img} source={require('../../images/General.png')}/>
-                        <View style={styles.groupContainerName}>
-                            <Text style={styles.groupName}>General</Text>
-                        </View>
-                        <Image style={styles.groupBack} source={require('../../images/Back.png')}/>
-                    </View>
-                </View>
+                <SettingsListItem name="Account" img={require('../../images/account.png')}/>
+                <SettingsListItem name="Notifications" img={require('../../images/notifications.png')}/>
+                <SettingsListItem name="Privacy" img={require('../../images/privacy.png')}/>
+                <SettingsListItem name="Help Center" img={require('../../images/helpCenter.png')}/>
+                <SettingsListItem name="General" img={require('../../images/General.png')}/>
                 <View style={styles.groupContainerLogout}>
                     <TouchableOpacity onPress={() => dispatch(authSwitch())}>
                         <View style={styles.groupLogout}>
@@ -90,33 +51,6 @@ const styles = StyleSheet.create({
     },
     mainGroupContainer: {
         marginTop: 75,
-    },
-    groupContainer: {
-        borderStyle: "solid",
-        borderColor: "rgba(56, 79, 125, 0.1)",
-        borderTopWidth: 1,
-    },
-    group: {
-        flexDirection: 'row',
-        marginTop: 14,
-        marginBottom: 14,
-        marginLeft: "10%",
-        marginRight: "10%",
-    },
-    groupName: {
-        fontSize: 16,
-        lineHeight: 22,
-        color: "rgba(68, 89, 132, 0.8)",
-    },
-    groupContainerName: {
-        marginLeft: 10,
-    },
-    img: {
-        marginTop: 3,
-    },
-    groupBack: {
-        marginTop: 6,
-        marginLeft: "auto",
     },
     groupContainerLogout: {
         borderStyle: "solid",
